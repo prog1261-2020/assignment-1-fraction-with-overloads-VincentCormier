@@ -1,0 +1,545 @@
+#include "gtest/gtest.h"
+#include "../source/Fraction.h"
+
+TEST(FractionTest, constructTest01) {
+	Fraction f1(8, 22);
+	Fraction f2(4, 11);
+
+	ASSERT_EQ(f1, f2);
+}
+
+TEST(FractionTest, constructTest02) {
+	Fraction f1(8, -22);
+	Fraction f2(-4, 11);
+
+	ASSERT_EQ(f1, f2);
+}
+
+TEST(FractionTest, equalityTest01) {
+	Fraction f1(8, 22);
+	Fraction f2(4, 11);
+
+	ASSERT_EQ(f1, f2);
+}
+
+TEST(FractionTest, equalityTest02) {
+	Fraction f1(8, 22);
+	Fraction f2(5, 11);
+
+	ASSERT_FALSE(f1 == f2);
+}
+
+TEST(FractionTest, inequalityTest01) {
+	Fraction f1(8, 22);
+	Fraction f2(5, 11);
+
+	ASSERT_NE(f1, f2);
+}
+
+TEST(FractionTest, inequalityTest02) {
+	Fraction f1(8, 22);
+	Fraction f2(4, 11);
+
+	ASSERT_FALSE(f1 != f2);
+}
+
+
+TEST(FractionTest, ltTest01) {
+	Fraction f1(8, 22);
+	Fraction f2(5, 11);
+
+	ASSERT_LT(f1, f2);
+}
+
+TEST(FractionTest, ltTest02) {
+	Fraction f1(8, 22);
+	Fraction f2(5, 11);
+
+	ASSERT_FALSE(f2 < f1);
+}
+
+TEST(FractionTest, ltTest03) {
+	Fraction f1(1, 2);
+	bool result = f1 < 3;
+	ASSERT_TRUE(result);
+}
+
+TEST(FractionTest, ltTest04) {
+	Fraction f1(1, 2);
+	bool result = 3 < f1;
+	ASSERT_FALSE(result);
+}
+
+TEST(FractionTest, leTest01) {
+	Fraction f1(8, 22);
+	Fraction f2(4, 11);
+
+	ASSERT_LE(f1, f2);
+}
+
+TEST(FractionTest, leTest02) {
+	Fraction f1(8, 22);
+	Fraction f2(5, 11);
+
+	ASSERT_FALSE(f2 < f1);
+}
+
+TEST(FractionTest, gtTest01) {
+	Fraction f1(8, 22);
+	Fraction f2(5, 22);
+
+	ASSERT_GT(f1, f2);
+}
+
+TEST(FractionTest, gtTest02) {
+	Fraction f1(8, 22);
+	Fraction f2(10, 22);
+
+	ASSERT_FALSE(f1 > f2);
+}
+
+TEST(FractionTest, gtTest03) {
+	Fraction f1(1, 2);
+	bool result = 3 > f1;
+	ASSERT_TRUE(result);
+}
+
+TEST(FractionTest, gtTest04) {
+	Fraction f1(1, 2);
+	bool result = f1 > 3;
+	ASSERT_FALSE(result);
+}
+
+TEST(FractionTest, geTest01) {
+	Fraction f1(8, 22);
+	Fraction f2(4, 11);
+
+	ASSERT_GE(f1, f2);
+}
+
+TEST(FractionTest, geTest02) {
+	Fraction f1(8, 22);
+	Fraction f2(10, 22);
+
+	ASSERT_FALSE(f1 > f2);
+}
+
+TEST(FractionTest, addTest01) {
+	Fraction f1(1, 2);
+	Fraction f2(2, 3);
+
+	Fraction expectedResult(7, 6);
+
+	ASSERT_EQ(f1 + f2, expectedResult);
+}
+
+TEST(FractionTest, addTest02) {
+	Fraction f1(1, 2);
+
+	Fraction expectedResult(3, 2);
+
+	ASSERT_EQ(f1 + 1, expectedResult);
+	ASSERT_EQ(1 + f1, expectedResult);
+}
+
+TEST(FractionTest, addTest03) {
+	Fraction f1(1, 2);
+	Fraction f2(2, 3);
+
+	f2 += f1;
+	Fraction expectedResult(7, 6);
+
+	ASSERT_EQ(f2, expectedResult);
+}
+
+TEST(FractionTest, addTest04) {
+	Fraction f1(1, 2);
+
+	f1 += 1;
+	Fraction expectedResult(3, 2);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+TEST(FractionTest, subTest01) {
+	Fraction f1(1, 2);
+	Fraction f2(2, 3);
+
+	Fraction expectedResult(-1, 6);
+
+	ASSERT_EQ(f1 - f2, expectedResult);
+}
+
+TEST(FractionTest, subTest02) {
+	Fraction f1(1, 2);
+
+	Fraction expectedResult(-1, 2);
+
+	ASSERT_EQ(f1 - 1, expectedResult);
+}
+
+TEST(FractionTest, subTest02b) {
+	Fraction f1(1, 2);
+
+	Fraction expectedResult(1, 2);
+
+	ASSERT_EQ(1 - f1, expectedResult);
+}
+
+TEST(FractionTest, subTest03) {
+	Fraction f1(1, 2);
+	Fraction f2(2, 3);
+
+	f2 -= f1;
+	Fraction expectedResult(1, 6);
+
+	ASSERT_EQ(f2, expectedResult);
+}
+
+TEST(FractionTest, subTest04) {
+	Fraction f1(1, 2);
+
+	f1 -= 1;
+	Fraction expectedResult(-1, 2);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+
+TEST(FractionTest, multTest01) {
+	Fraction f1(1, -2);
+	Fraction f2(-3, 4);
+
+	Fraction expectedResult(3, 8);
+
+	ASSERT_EQ(f1 * f2, expectedResult);
+}
+
+TEST(FractionTest, multTest02) {
+	Fraction f1(1, -2);
+
+	Fraction expectedResult(3, 2);
+
+	ASSERT_EQ(f1 * -3, expectedResult);
+	ASSERT_EQ(-3 * f1, expectedResult);
+}
+
+TEST(FractionTest, multTest03) {
+	Fraction f1(1, -2);
+	Fraction f2(-3, 4);
+
+	f1 *= f2;
+	Fraction expectedResult(3, 8);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+TEST(FractionTest, multTest04) {
+	Fraction f1(1, -2);
+
+	f1 *= 3;
+	Fraction expectedResult(-3, 2);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+TEST(FractionTest, divTest01) {
+	Fraction f1(1, -2);
+	Fraction f2(-3, 4);
+
+	Fraction expectedResult(2, 3);
+
+	ASSERT_EQ(f1 / f2, expectedResult);
+}
+
+TEST(FractionTest, divTest02) {
+	Fraction f1(1, -2);
+
+	Fraction expectedResult(1, 6);
+
+	ASSERT_EQ(f1 / -3, expectedResult);
+}
+
+
+TEST(FractionTest, divTest02b) {
+	Fraction f1(1, -2);
+
+	Fraction expectedResult(6, 1);
+
+	ASSERT_EQ(-3 / f1, expectedResult);
+}
+TEST(FractionTest, divTest03) {
+	Fraction f1(1, -2);
+	Fraction f2(-3, 4);
+
+	f1 /= f2;
+	Fraction expectedResult(2, 3);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+TEST(FractionTest, divTest04) {
+	Fraction f1(1, -2);
+
+	f1 /= 3;
+	Fraction expectedResult(-1, 6);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+TEST(FractionTest, osTest01) {
+	Fraction f1(2, -4);
+	std::stringstream ss;
+	ss << f1;
+	std::string expectedResult = "-1/2";
+
+	ASSERT_EQ(ss.str(), expectedResult);
+}
+
+TEST(FractionTest, isTest01) {
+	Fraction f1;
+	std::istringstream si(std::string("-5/22"));
+	si >> f1;
+	Fraction  expectedResult(-5, 22);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+
+TEST(FractionTest, isTest02) {
+	Fraction f1;
+	std::istringstream si(std::string("5 /     -22"));
+	si >> f1;
+	Fraction  expectedResult(-5, 22);
+
+	ASSERT_EQ(f1, expectedResult);
+}
+
+
+/*Name: Vincent Cormier
+Date: 2020-01-18
+Purpose: Today we redefine operators to suite our Fraction class!*/
+
+#pragma once
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+
+class Fraction
+{
+public:
+	Fraction();
+	Fraction(int n);
+	Fraction(int n, int d);
+
+	void lcd(Fraction& f);
+	
+	Fraction operator+(Fraction rhs);
+	Fraction& operator+=(Fraction& rhs);
+
+	Fraction operator-(Fraction rhs);
+	Fraction& operator-=(Fraction& rhs);
+
+	Fraction operator*(Fraction rhs);
+	Fraction& operator*=(Fraction& rhs);
+
+	Fraction operator/(Fraction rhs);
+	Fraction& operator/=(Fraction& rhs);
+
+	bool operator==(Fraction rhs);
+	bool operator!=(Fraction rhs);
+
+	bool operator<(Fraction rhs);
+	bool operator<=(Fraction rhs);
+	bool operator>(Fraction rhs);
+	bool operator>=(Fraction rhs);
+
+	//outpout stream.. "-1/2"
+	//input stream
+
+private:
+	int numerator_;
+	int denominator_;
+};
+
+
+/*Name: Vincent Cormier
+Date: 2020-01-18
+Purpose: Today we redefine operators to suite our Fraction class!*/
+
+#include "Fraction.h"
+
+
+Fraction::Fraction()
+{
+	numerator_ = 1;
+	denominator_ = 1;
+}
+
+Fraction::Fraction(int n)
+{
+	numerator_ = n;
+	denominator_ = 1;
+}
+
+Fraction::Fraction(int n, int d)
+{
+	numerator_ = n;
+	if (d < 0) {
+		n *= -1;
+		d *= -1;
+		denominator_ = d;
+	}
+	else if(d == 0){
+		denominator_ = 1;
+	}
+	else {
+		denominator_ = d;
+	}
+}
+
+void Fraction::lcd(Fraction& f)
+{
+	bool found = false;
+	int test = f.denominator_;
+	int num = f.numerator_;
+	int den = f.denominator_;
+	while (found) {
+		if ((num % test == 0) && (den % test == 0)) {
+			f.numerator_ = num/ test;
+			f.denominator_ = den / test;
+			found = true;
+		}
+		else {
+			if (test > 0) {
+				test--;
+			}
+			else {
+				found = true;
+			}
+		}
+	}
+	f.numerator_ = num;
+	f.denominator_ = den;
+}
+
+Fraction Fraction::operator+(Fraction rhs)
+{
+	Fraction f;
+	f.denominator_ = (denominator_ * rhs.denominator_);
+	f.numerator_ = ((denominator_ * rhs.numerator_) + (rhs.denominator_ * numerator_));
+	lcd(f);
+	return f;
+}
+
+Fraction& Fraction::operator+=(Fraction& rhs)
+{
+	*this = *this + rhs;
+	return *this;
+}
+
+Fraction Fraction::operator-(Fraction rhs)
+{
+	Fraction f;
+	f.denominator_ = (denominator_ * rhs.denominator_);
+	f.numerator_ = ((denominator_ * rhs.numerator_) - (rhs.denominator_ * numerator_));
+	lcd(f);
+	return f;
+}
+
+Fraction& Fraction::operator-=(Fraction& rhs)
+{
+	*this = *this - rhs;
+	return *this;
+}
+
+Fraction Fraction::operator*(Fraction rhs)
+{
+	Fraction f;
+	f.numerator_ = numerator_ * rhs.numerator_;
+	f.denominator_ = denominator_ * rhs.denominator_;
+	lcd(f);
+	return f;
+}
+
+Fraction& Fraction::operator*=(Fraction& rhs)
+{
+	*this = *this * rhs;
+	return *this;
+}
+
+Fraction Fraction::operator/(Fraction rhs)
+{
+	Fraction f;
+	f.numerator_ = numerator_ * rhs.denominator_;
+	f.denominator_ = denominator_ * rhs.numerator_;
+	if (f.numerator_ < 0 && f.denominator_ < 0) {
+		f.denominator_ = f.denominator_ * -1;
+	}
+	if (f.numerator_ >= 0 && f.denominator_ < 0) {
+		f.numerator_ = f.numerator_ * -1;
+		f.denominator_ = f.denominator_ * -1;
+	}
+	lcd(f);
+	return f;
+}
+
+Fraction& Fraction::operator/=(Fraction& rhs)
+{
+	*this = *this / rhs;
+	return *this;
+}
+
+bool Fraction::operator==(Fraction rhs)
+{
+	if (numerator_ == rhs.numerator_ && denominator_ == rhs.denominator_) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Fraction::operator!=(Fraction rhs)
+{
+	if (numerator_ == rhs.numerator_ && denominator_ == rhs.denominator_) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+bool Fraction::operator<(Fraction rhs)
+{
+	double check = 0;
+	check = (numerator_ / denominator_) - (rhs.numerator_ / rhs.denominator_);
+	if (check < 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Fraction::operator<=(Fraction rhs)
+{
+	return false;
+}
+
+bool Fraction::operator>(Fraction rhs)
+{
+	double check = 0;
+	check = (numerator_ / denominator_) - (rhs.numerator_ / rhs.denominator_);
+	if (check > 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Fraction::operator>=(Fraction rhs)
+{
+	return false;
+}
